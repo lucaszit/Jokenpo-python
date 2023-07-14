@@ -15,6 +15,8 @@ e verifica se foi vencedor ou perdedor contra o computador, que também irá sel
 
 ### :pencil: Passo a passo básico:
 
+> Concluido :heavy_check_mark:
+
 ```
 1. Criar um input para permitir que o usuário escreva a opção que quer escolher
 2. O computador também escolhera uma das opções de forma aleatória
@@ -27,12 +29,11 @@ e verifica se foi vencedor ou perdedor contra o computador, que também irá sel
 
 ### 🔨 Implementações Bonus em versões seguintes:
 
-```
+> Em progresso :construction:
+
 1. Contador de pontuação
 2. Interface gráfica
 3. Opção de jogar contra o computador ou contra outro jogador
-4. Adicionar a opção de jogo Pedra, Papel, Tesoura, Lagarto e Spock
-5. Opção de Menu para consultar a pontuação
-6. Adicionar música ao jogo
-7. Validar o input que salva escolha_jogador, para permitir que apenas as palavras corretas sejam inseridas
-```
+4. Opção de Menu para consultar a pontuação
+5. Adicionar música ao jogo
+6. :heavy_check_mark: Validar o input user_input para possibilitar apenas escolhas permitidas
