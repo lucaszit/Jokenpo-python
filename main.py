@@ -11,8 +11,10 @@ def continue_play():
     play_again = ''
     
     while play_again.lower() != 'n':
-        play()
         
+        start_play()
+        
+        print('')
         print ('Você quer jogar novamente? ')
         play_again = input('Escreva \'s\' para sim ou \'n\' para não: ')
 
@@ -28,27 +30,29 @@ def user_choice(options):
     for index,option in enumerate(options):
         print(f'{index} = {option}')
 
-    user_input = int(input('Qual número você escolhe?'))
-    user_input_validator = user_choice_validator(user_input)
+
+    user_input = input('Qual número você escolhe?')
     
-    return user_input_validator
-
-'''
-user_choice_validator Function
-Usada pra validar se o número escolhido pelo jogador está entre os números permitidos
-
-return int
-'''
-def user_choice_validator(user_option):
+    # Validação do user_input para permitir apenas os números informados
+    # TODO: Transformar esse bloco em uma função de validação
+    input_validator = user_input.isnumeric()
+    while(input_validator == False):
+        print('Escolha o número de uma das opções acima!')
+        user_input = input('Qual número você escolhe?')
+        input_validator = user_input.isnumeric()
+        while (input_validator == True):
+            if user_input == '0' or user_input == '1' or user_input == '2':
+                int_user_input = int(user_input)
+                break
+            else:
+                print('Escolha o número de uma das opções acima!')
+                user_input = input('Qual número você escolhe?')
+                input_validator = user_input.isnumeric()
+                
+                
+    return int_user_input
     
-     while user_option != 1 or 2 or 3:
-        
-        print('Opção não permitida!')
-        print('Escolha uma das opções apresentadas!')
-        
-        user_choice(user_option)
-        
-
+    
 '''
 computer_choice Function
 Usada para retornar a opção escolhida aleatoriamente pelo computador
@@ -57,9 +61,9 @@ return int
 '''
 def computer_choice(content):
 
-    computer_chose = randint(0,len(content)-1)
-    
+    computer_chose = randint(0, len(content)-1)
     return computer_chose
+
 
 '''
 validate_results Function
@@ -70,25 +74,25 @@ return string
 def validate_results(choices, player, computer):
 
     if player == computer:
-        return print('Ocorreu um empate!')
+        return 'Ocorreu um empate!'
     
     elif (player == 0 and computer == len(choices)-1) or ( player > computer and not(player == len(choices)-1 and computer == 0)):
-        return print('Jogador Venceu!')
-    
-    return print('Jogador Perdeu')
+        return 'Jogador Venceu!'
+    else: 
+        return 'Jogador Perdeu'
+
 
 '''
-play Function
+start_play Function
 Usada para iniciar o jogo e mostrar as opções escolhidas e o vencedor
 
 return void
 '''
-def play():
-    print('''
-    ---------------------------------
-    Bem vindo ao Pedra, Papel e Tesoura! - Escolha uma opção
-    ---------------------------------
-    ''')
+def start_play():
+    
+    print('---------------------------------')
+    print('Bem vindo ao Pedra, Papel e Tesoura!')
+    print('---------------------------------')
 
     # Opções que serão escolhidas pelo jogador e pelo computador
     options_list = ['Pedra', 'Papel' , 'Tesoura']
@@ -96,13 +100,16 @@ def play():
     computer_result = computer_choice(options_list)
     
     # Representação visual da escolha de cada um
+    print('')
     print(f'Escolha do jogador: {options_list[player_result]}')
     print(f'Escolha do computador: {options_list[computer_result]}')
 
     # Verifica o resultado e diz quem foi o vencedor
     results = validate_results(options_list, player_result, computer_result)
     
-    print (f'\n{results}')
+    print('')
+    return print (f'\n{results}')
     
-    
+
+# Chamada da função que dá inicio ao jogo e encadeia todas as outras funções
 continue_play()
